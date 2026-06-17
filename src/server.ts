@@ -1,10 +1,11 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors'; // 1. Importa o plugin de CORS oficial do Fastify
 import dotenv from 'dotenv';
 import path from 'path';
 import { connectDatabase } from './config/database';
 import { authRoutes } from './routes/auth';
 import { rastreioRoutes } from './routes/rastreio';
-import { suporteRoutes } from './routes/suporte'; // 1. Importa a rota de suporte
+import { suporteRoutes } from './routes/suporte';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
@@ -14,10 +15,15 @@ async function start() {
   try {
     await connectDatabase();
 
-    // 2. Registra TODAS as rotas da nossa central de atendimento
+    // 2. Registra o CORS antes das rotas para liberar o acesso do seu HTML
+    await fastify.register(cors, {
+      origin: true // Permite que qualquer origem (como seu arquivo local) faça requisições
+    });
+
+    // 3. Registra todas as rotas da nossa central de atendimento
     await fastify.register(authRoutes);
     await fastify.register(rastreioRoutes);
-    await fastify.register(suporteRoutes); // Registro da nova rota de suporte
+    await fastify.register(suporteRoutes);
 
     const port = Number(process.env.PORT) || 3333;
 
