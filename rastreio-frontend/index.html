@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rastreio de Pedidos</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h2>📦 Rastrear Meu Pedido</h2>
+            <p>Digite seus pedidos abaixo para localizar sua entrega de forma segura.</p>
+
+            <form id="rastreioForm">
+                <div class="input-group">
+                    <label for="cpf">CPF (somente numeros) </label>
+                    <input type="text" id="cpf" placeholder="EX:12345678901 " required maxlength="11"> 
+                </div>
+
+
+                <div class="input-group">
+                    <label for="pedido">Numero do pedido</label>
+                    <input type="text" id="pedido" placeholder="EX: 1050" required>
+                </div>
+
+
+                <button type="submit" id="btnBuscar">Buscar Pedido</button>
+            </form>
+
+            <div id="resultado" class="resultado hidden"></div>
+        </div>
+
+        <script src="script.js"></script>
+
+    </body>
+</html>
